@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V4 Editor</title>
+    <style>
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: system-ui, sans-serif;
+            background: #0f0f17;
+            color: #e2e8f0;
+            height: 100vh;
+            display: grid;
+            grid-template-columns: 240px 1fr 300px;
+            grid-template-rows: 48px 1fr;
+            overflow: hidden;
+        }
+
+        /* Toolbar */
+        #toolbar {
+            grid-column: 1 / -1;
+            background: #16161e;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+            display: flex;
+            align-items: center;
+            padding: 0 16px;
+            gap: 12px;
+        }
+        #toolbar .logo {
+            font-weight: 700;
+            font-size: 0.9rem;
+            color: #a78bfa;
+        }
+        #toolbar button {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #94a3b8;
+            padding: 6px 14px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        #toolbar button:hover {
+            background: rgba(255,255,255,0.1);
+            color: #e2e8f0;
+        }
+
+        /* Panel Árbol */
+        #panel-arbol {
+            background: #13131b;
+            border-right: 1px solid rgba(255,255,255,0.06);
+            overflow-y: auto;
+            padding: 12px 0;
+        }
+        .nodo-arbol {
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            color: #64748b;
+            cursor: pointer;
+            border-left: 2px solid transparent;
+            transition: all 0.15s;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .nodo-arbol:hover {
+            background: rgba(255,255,255,0.03);
+            color: #94a3b8;
+        }
+        .nodo-arbol.activo {
+            background: rgba(139,92,246,0.1);
+            color: #a78bfa;
+            border-left-color: #a78bfa;
+        }
+
+        /* Canvas */
+        #canvas {
+            background: #0a0a12;
+            position: relative;
+            overflow: hidden;
+        }
+        #canvas iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Inspector */
+        #inspector {
+            background: #13131b;
+            border-left: 1px solid rgba(255,255,255,0.06);
+            overflow-y: auto;
+            padding: 16px;
+        }
+        #inspector h3 {
+            font-size: 0.7rem;
+            color: #475569;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 12px;
+        }
+        #inspector .seccion {
+            margin-bottom: 20px;
+        }
+        .prop-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 4px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+        }
+        .prop-label {
+            font-size: 0.72rem;
+            color: #64748b;
+        }
+        .prop-input {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.08);
+            color: #e2e8f0;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            width: 140px;
+            text-align: right;
+        }
+        .prop-input:focus {
+            outline: none;
+            border-color: #a78bfa;
+        }
+        .prop-color {
+            width: 24px;
+            height: 24px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+            cursor: pointer;
+            padding: 0;
+        }
+        #sin-seleccion {
+            color: #334155;
+            font-size: 0.8rem;
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        /* Plus section */
+        .plus-seccion {
+            margin-top: 16px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(139,92,246,0.2);
+        }
+        .plus-seccion h3 {
+            color: #7c3aed;
+        }
+    </style>
+</head>
+<body>
+    <div id="toolbar">
+        <span class="logo">V4 Editor</span>
+        <button id="btn-guardar">Guardar</button>
+        <button id="btn-exportar">Exportar JSON</button>
+    </div>
+
+    <div id="panel-arbol"></div>
+
+    <div id="canvas">
+        <iframe id="preview" src="index.html"></iframe>
+    </div>
+
+    <div id="inspector">
+        <div id="sin-seleccion">Selecciona un elemento</div>
+        <div id="props-nativas" class="seccion" style="display:none;"></div>
+        <div id="props-plus" class="plus-seccion" style="display:none;"></div>
+    </div>
+
+    <script type="module" src="editor-app.js"></script>
+</body>
+</html>

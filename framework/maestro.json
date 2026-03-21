@@ -1,0 +1,182 @@
+{
+    "head": {
+        "titulo": "V4 Framework — Test"
+    },
+    "pagina": {
+        "width": "100%",
+        "min-height": "100vh",
+        "background": "#0a0a0f",
+        "display": "flex",
+        "flex-direction": "column",
+        "align-items": "center",
+        "padding": "40px",
+        "header": {
+            "width": "100%",
+            "max-width": "800px",
+            "padding": "20px",
+            "background": "rgba(255,255,255,0.03)",
+            "border": "1px solid rgba(255,255,255,0.08)",
+            "border-radius": "16px",
+            "margin-bottom": "20px",
+            "titulo": {
+                "texto": {
+                    "contenido": "V4 Framework",
+                    "font-size": "2rem",
+                    "font-weight": "700",
+                    "gradiente-texto": {
+                        "colores": [
+                            "#a855f7",
+                            "#ec4899",
+                            "#3b82f6"
+                        ],
+                        "posiciones": [
+                            0,
+                            50,
+                            100
+                        ],
+                        "direccion": "225deg"
+                    }
+                }
+            },
+            "subtitulo": {
+                "texto": {
+                    "contenido": "JSON → JS → HTML",
+                    "font-size": "1rem",
+                    "color": "#64748b"
+                }
+            }
+        },
+        "contenido": {
+            "width": "100%",
+            "max-width": "800px",
+            "display": "flex",
+            "gap": "16px",
+            "caja1": {
+                "flex": "1",
+                "padding": "24px",
+                "background": "rgba(139,92,246,0.1)",
+                "border": "1px solid rgba(139,92,246,0.2)",
+                "border-radius": "12px",
+                "label1": {
+                    "texto": {
+                        "contenido": "Paleta de texto funcionando",
+                        "color": "#c4b5fd",
+                        "font-size": "0.9rem",
+                        "gradiente-texto": {
+                            "colores": [
+                                "#a855f7",
+                                "#ec4899",
+                                "#3b82f6"
+                            ],
+                            "posiciones": [
+                                0,
+                                50,
+                                100
+                            ],
+                            "direccion": "165deg"
+                        }
+                    }
+                }
+            },
+            "caja2": {
+                "flex": "1",
+                "padding": "24px",
+                "background": "rgba(59,130,246,0.1)",
+                "border": "1px solid rgba(59,130,246,0.2)",
+                "border-radius": "12px",
+                "label2": {
+                    "texto": {
+                        "contenido": "Defaults del base.json aplicados",
+                        "font-size": "0.9rem",
+                        "gradiente-texto": {
+                            "colores": [
+                                "#000000",
+                                "#ffffff",
+                                "#3b82f6"
+                            ],
+                            "posiciones": [
+                                0,
+                                73,
+                                100
+                            ],
+                            "direccion": "203deg"
+                        }
+                    }
+                }
+            }
+        },
+        "demo-estado": {
+            "width": "100%",
+            "max-width": "800px",
+            "display": "flex",
+            "gap": "16px",
+            "margin-top": "20px",
+            "boton-estado": {
+                "padding": "16px 32px",
+                "border-radius": "10px",
+                "font-size": "0.9rem",
+                "font-family": "system-ui, sans-serif",
+                "transition": "all 0.3s ease",
+                "texto": {
+                    "contenido": "Click para cambiar estado"
+                },
+                "estado": {
+                    "variable": "modo",
+                    "actual": "normal",
+                    "acciones": {
+                        "click": "activo",
+                        "hover-salir": "activonormal"
+                    },
+                    "reacciones": {
+                        "normal": {
+                            "background": "#1e293b",
+                            "color": "#e2e8f0",
+                            "border": "1px solid rgba(255,255,255,0.1)"
+                        },
+                        "activo": {
+                            "background": "#22c55e",
+                            "color": "#000000",
+                            "border": "1px solid #22c55e"
+                        },
+                        "activonormal": {
+                            "background": "#910303",
+                            "color": "",
+                            "border": "1px solid #22c55e"
+                        }
+                    }
+                }
+            },
+            "caja-hover": {
+                "padding": "16px 32px",
+                "border-radius": "10px",
+                "font-size": "0.9rem",
+                "font-family": "system-ui, sans-serif",
+                "transition": "all 0.3s ease",
+                "texto": {
+                    "contenido": "Hover para activar"
+                },
+                "estado": {
+                    "variable": "hover-modo",
+                    "actual": "reposo",
+                    "acciones": {
+                        "hover": "encendido",
+                        "hover-salir": "reposo"
+                    },
+                    "reacciones": {
+                        "reposo": {
+                            "background": "#1e293b",
+                            "color": "#64748b",
+                            "border": "1px solid rgba(255,255,255,0.05)"
+                        },
+                        "encendido": {
+                            "background": "rgba(139,92,246,0.2)",
+                            "color": "#a78bfa",
+                            "border": "1px solid rgba(139,92,246,0.4)",
+                            "transform": "scale(1.02)"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

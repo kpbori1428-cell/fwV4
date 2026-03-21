@@ -1,0 +1,7 @@
+{
+    "gradiente-texto": {
+        "colores": ["#a855f7", "#ec4899", "#3b82f6"],
+        "posiciones": [0, 50, 100],
+        "direccion": "135deg"
+    }
+}
