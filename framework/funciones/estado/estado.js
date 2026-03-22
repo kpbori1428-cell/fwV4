@@ -56,26 +56,19 @@ function aplicarEstado(id, nuevoEstado) {
     // Aplicar propiedades del nuevo estado
     for (const prop in propiedades) {
         if (prop === 'texto') {
-            // Intentar encontrar el texto generado por la paleta 'texto'
-            // O modificar textContent si no hay (usar textContent es más seguro que innerText en inicialización)
-
-            // Usamos setTimeout para permitir que el motor termine de agregar hijos en el mismo tick
-            setTimeout(() => {
-                // Selecciona cualquier nodo hijo que sea un div de texto dentro de este elemento
-                const textNode = Array.from(estado.elemento.querySelectorAll('div')).find(div => div.dataset.path && div.dataset.path.endsWith('.texto'));
-                if (textNode) {
-                    textNode.textContent = propiedades[prop];
-                } else {
-                    // Si no existe un div de paleta texto, creamos uno de texto puro o lo actualizamos
-                    const textDirect = Array.from(estado.elemento.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
-                    if (textDirect) {
-                        textDirect.nodeValue = propiedades[prop];
-                    } else {
-                        estado.elemento.appendChild(document.createTextNode(propiedades[prop]));
-                    }
+            estado.elemento.dataset.estadoTextoEsperado = propiedades[prop];
+            // Actualizar el DOM si la paleta de texto ya existe o si solo hay texto plano
+            const textNode = Array.from(estado.elemento.querySelectorAll('div')).find(div => div.dataset.path && div.dataset.path.endsWith('.texto'));
+            if (textNode) {
+                textNode.innerHTML = propiedades[prop];
+            } else {
+                const textDirect = Array.from(estado.elemento.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+                if (textDirect) {
+                    textDirect.nodeValue = propiedades[prop];
+                } else if (estado.elemento.childNodes.length === 0) {
+                    estado.elemento.innerHTML = propiedades[prop];
                 }
-            }, 50);
-
+            }
         } else {
             estado.elemento.style.setProperty(prop, propiedades[prop]);
         }

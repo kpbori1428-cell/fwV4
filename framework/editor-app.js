@@ -105,6 +105,7 @@ async function mostrarInspector(datos, path) {
     sinSeleccion.style.display = 'none';
     propsNativas.style.display = 'block';
     propsNativas.innerHTML = '<h3>Propiedades Nativas</h3>';
+    propsPlus.innerHTML = '';
 
     let tienePlus = false;
 
@@ -187,7 +188,29 @@ function agregarControlNativo(clave, valor, jsonRef, contenedor) {
 // Mostrar controles plus de una paleta
 async function mostrarPlusControles(nombrePaleta, editorMod, datos, path) {
     propsPlus.style.display = 'block';
-    propsPlus.innerHTML = `<h3>Plus — ${nombrePaleta}</h3>`;
+
+    const contenedorPlus = document.createElement('div');
+    contenedorPlus.style.cssText = 'margin-bottom: 12px; border: 1px solid rgba(139,92,246,0.3); border-radius: 6px; overflow: hidden;';
+
+    // Header del acordeón
+    const header = document.createElement('div');
+    header.style.cssText = 'background: rgba(139,92,246,0.15); padding: 8px 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #d8b4fe; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;';
+
+    const titulo = document.createElement('span');
+    titulo.textContent = `Plus — ${nombrePaleta}`;
+    header.appendChild(titulo);
+
+    const iconoCaret = document.createElement('span');
+    // Si la paleta es la de texto o estado por default las cerramos, y abrimos la de condicion si existe. O por simplicidad, todas abiertas.
+    iconoCaret.textContent = '▼';
+    iconoCaret.style.cssText = 'transition: transform 0.2s; font-size: 0.7rem;';
+    header.appendChild(iconoCaret);
+
+    contenedorPlus.appendChild(header);
+
+    // Contenido del acordeón
+    const contenido = document.createElement('div');
+    contenido.style.cssText = 'padding: 12px; background: rgba(0,0,0,0.2);';
 
     const datosPlus = datos[nombrePaleta] || {};
 
@@ -201,10 +224,25 @@ async function mostrarPlusControles(nombrePaleta, editorMod, datos, path) {
     // El editor.js de la paleta construye los controles reales
     const controles = editorMod.construirControles(datosPlus, elementoPreview, (propiedad, valor) => {
         // Callback: actualizar JSON cuando el usuario modifica un control
-        datos[nombrePaleta][propiedad] = valor;
+        if (Array.isArray(datos[nombrePaleta]) && propiedad === nombrePaleta) {
+            datos[nombrePaleta] = valor;
+        } else {
+            datos[nombrePaleta][propiedad] = valor;
+        }
     });
 
-    propsPlus.appendChild(controles);
+    contenido.appendChild(controles);
+    contenedorPlus.appendChild(contenido);
+
+    // Lógica colapsable
+    let abierto = true;
+    header.addEventListener('click', () => {
+        abierto = !abierto;
+        contenido.style.display = abierto ? 'block' : 'none';
+        iconoCaret.style.transform = abierto ? 'rotate(0deg)' : 'rotate(-90deg)';
+    });
+
+    propsPlus.appendChild(contenedorPlus);
 }
 
 // Actualizar preview recargando el iframe
