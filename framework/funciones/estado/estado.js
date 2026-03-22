@@ -47,16 +47,46 @@ function aplicarEstado(id, nuevoEstado) {
     // Limpiar propiedades de todos los estados
     for (const nombreEstado in estado.reacciones) {
         for (const prop in estado.reacciones[nombreEstado]) {
-            estado.elemento.style.removeProperty(prop);
+            if (prop !== 'texto') {
+                estado.elemento.style.removeProperty(prop);
+            }
         }
     }
 
     // Aplicar propiedades del nuevo estado
     for (const prop in propiedades) {
-        estado.elemento.style.setProperty(prop, propiedades[prop]);
+        if (prop === 'texto') {
+            // Intentar encontrar el texto generado por la paleta 'texto'
+            // O modificar textContent si no hay (usar textContent es más seguro que innerText en inicialización)
+
+            // Usamos setTimeout para permitir que el motor termine de agregar hijos en el mismo tick
+            setTimeout(() => {
+                // Selecciona cualquier nodo hijo que sea un div de texto dentro de este elemento
+                const textNode = Array.from(estado.elemento.querySelectorAll('div')).find(div => div.dataset.path && div.dataset.path.endsWith('.texto'));
+                if (textNode) {
+                    textNode.textContent = propiedades[prop];
+                } else {
+                    // Si no existe un div de paleta texto, creamos uno de texto puro o lo actualizamos
+                    const textDirect = Array.from(estado.elemento.childNodes).find(node => node.nodeType === Node.TEXT_NODE);
+                    if (textDirect) {
+                        textDirect.nodeValue = propiedades[prop];
+                    } else {
+                        estado.elemento.appendChild(document.createTextNode(propiedades[prop]));
+                    }
+                }
+            }, 50);
+
+        } else {
+            estado.elemento.style.setProperty(prop, propiedades[prop]);
+        }
     }
 
     estado.elemento.dataset.estado = nuevoEstado;
+
+    // Disparar evento global para que otras funciones (ej. condicion) reaccionen
+    document.dispatchEvent(new CustomEvent('v4-estado-cambiado', {
+        detail: { id, estado: nuevoEstado }
+    }));
 }
 
 function cambiarEstado(id, nuevoEstado) {

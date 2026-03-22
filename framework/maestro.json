@@ -109,26 +109,106 @@
             "width": "100%",
             "max-width": "800px",
             "display": "flex",
+            "flex-direction": "column",
             "gap": "16px",
             "margin-top": "20px",
-            "boton-estado": {
+            "grupo-switches": {
+                "display": "flex",
+                "gap": "16px",
+                "switch1": {
+                    "padding": "16px 32px",
+                    "border-radius": "10px",
+                    "font-size": "0.9rem",
+                    "font-family": "system-ui, sans-serif",
+                    "transition": "all 0.3s ease",
+                    "texto": { "contenido": "Switch 1" },
+                    "estado": {
+                        "variable": "modo1",
+                        "actual": "apagado",
+                        "reacciones": {
+                            "apagado": { "background": "#1e293b", "color": "#e2e8f0" },
+                            "encendido": { "background": "#22c55e", "color": "#000000" }
+                        }
+                    },
+                    "condicion": [
+                        { "evento": "click", "si-estado-es": "apagado", "entonces-cambiar-a": "encendido" },
+                        { "evento": "click", "si-estado-es": "encendido", "entonces-cambiar-a": "apagado" }
+                    ]
+                },
+                "switch2": {
+                    "padding": "16px 32px",
+                    "border-radius": "10px",
+                    "font-size": "0.9rem",
+                    "font-family": "system-ui, sans-serif",
+                    "transition": "all 0.3s ease",
+                    "texto": { "contenido": "Switch 2" },
+                    "estado": {
+                        "variable": "modo2",
+                        "actual": "apagado",
+                        "reacciones": {
+                            "apagado": { "background": "#1e293b", "color": "#e2e8f0" },
+                            "encendido": { "background": "#22c55e", "color": "#000000" }
+                        }
+                    },
+                    "condicion": [
+                        { "evento": "click", "si-estado-es": "apagado", "entonces-cambiar-a": "encendido" },
+                        { "evento": "click", "si-estado-es": "encendido", "entonces-cambiar-a": "apagado" }
+                    ]
+                }
+            },
+            "puerta": {
+                "padding": "24px",
+                "border-radius": "10px",
+                "font-size": "1.2rem",
+                "font-family": "system-ui, sans-serif",
+                "text-align": "center",
+                "transition": "all 0.5s ease",
+                "estado": {
+                    "variable": "acceso",
+                    "actual": "cerrado",
+                    "reacciones": {
+                        "cerrado": {
+                            "background": "#ef4444",
+                            "color": "#ffffff",
+                            "texto": "PUERTA CERRADA (Enciende ambos switches)"
+                        },
+                        "abierto": {
+                            "background": "#3b82f6",
+                            "color": "#ffffff",
+                            "texto": "PUERTA ABIERTA!"
+                        }
+                    }
+                },
+                "condicion": [
+                    {
+                        "observar": ["pagina.demo-estado.grupo-switches.switch1", "pagina.demo-estado.grupo-switches.switch2"],
+                        "si-todos-son": "encendido",
+                        "entonces-cambiar-a": "abierto"
+                    },
+                    {
+                        "observar": ["pagina.demo-estado.grupo-switches.switch1", "pagina.demo-estado.grupo-switches.switch2"],
+                        "si-alguno-es": "apagado",
+                        "entonces-cambiar-a": "cerrado"
+                    }
+                ],
+                "texto": {
+                    "contenido": "Puerta"
+                }
+            },
+            "boton-toggle": {
                 "padding": "16px 32px",
                 "border-radius": "10px",
                 "font-size": "0.9rem",
                 "font-family": "system-ui, sans-serif",
                 "transition": "all 0.3s ease",
                 "texto": {
-                    "contenido": "Click para cambiar estado"
+                    "contenido": "Click para alternar"
                 },
                 "estado": {
                     "variable": "modo",
-                    "actual": "normal",
-                    "acciones": {
-                        "click": "activo",
-                        "hover-salir": "activonormal"
-                    },
+                    "actual": "reposo",
                     "reacciones": {
-                        "normal": {
+                        "reposo": {
                             "background": "#1e293b",
                             "color": "#e2e8f0",
                             "border": "1px solid rgba(255,255,255,0.1)"
@@ -137,14 +217,21 @@
                             "background": "#22c55e",
                             "color": "#000000",
                             "border": "1px solid #22c55e"
-                        },
-                        "activonormal": {
-                            "background": "#910303",
-                            "color": "",
-                            "border": "1px solid #22c55e"
                         }
                     }
-                }
+                },
+                "condicion": [
+                    {
+                        "evento": "click",
+                        "si-estado-es": "reposo",
+                        "entonces-cambiar-a": "activo"
+                    },
+                    {
+                        "evento": "click",
+                        "si-estado-es": "activo",
+                        "entonces-cambiar-a": "reposo"
+                    }
+                ]
             },
             "caja-hover": {
                 "padding": "16px 32px",

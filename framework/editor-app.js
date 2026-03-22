@@ -119,7 +119,7 @@ async function mostrarInspector(datos, path) {
                 editorMod = await import(`./paletas/${clave}/editor.js`);
             } catch (e) {}
 
-            // Intentar cargar editor de función
+            // Intentar cargar editor de función (ej: estado, condicion)
             if (!editorMod) {
                 try {
                     editorMod = await import(`./funciones/${clave}/editor.js`);

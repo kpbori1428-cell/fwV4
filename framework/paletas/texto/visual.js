@@ -40,8 +40,11 @@ export async function construir(config, elemento, path) {
         }
     }
 
-    // Contenido de texto
-    if (config.contenido) {
+    // Contenido de texto (respetar si un estado ya lo sobreescribió en init)
+    // El dataset se establece en el mismo elemento (ya que "estado" y "texto" son hermanos en el JSON y aplican al mismo nodo)
+    if (elemento.dataset && elemento.dataset.estadoTextoEsperado) {
+        elemento.innerHTML = elemento.dataset.estadoTextoEsperado;
+    } else if (config.contenido) {
         elemento.innerHTML = config.contenido;
     }
 
