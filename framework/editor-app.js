@@ -150,6 +150,81 @@ async function mostrarInspector(datos, path) {
     if (!tienePlus) {
         propsPlus.style.display = 'none';
     }
+
+    // Agregar sección para inyectar nuevos módulos (paletas/funciones)
+    agregarSelectorDeModulos(datos, path);
+}
+
+// Selector para añadir módulos que el elemento aún no tiene
+function agregarSelectorDeModulos(datos, path) {
+    const contenedorAdd = document.createElement('div');
+    contenedorAdd.style.cssText = 'margin-top: 24px; padding-top: 16px; border-top: 1px dashed rgba(255,255,255,0.1);';
+
+    const titulo = document.createElement('h3');
+    titulo.textContent = 'Añadir Funcionalidad';
+    titulo.style.cssText = 'font-size: 0.7rem; color: #475569; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;';
+    contenedorAdd.appendChild(titulo);
+
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'display: flex; gap: 8px;';
+
+    const select = document.createElement('select');
+    select.style.cssText = 'flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: #e2e8f0; padding: 6px 8px; border-radius: 4px; font-size: 0.75rem;';
+
+    // Lista de módulos core disponibles
+    const modulosDisponibles = ['estado', 'condicion', 'texto'];
+
+    // Filtrar los que ya tiene el elemento
+    const modulosParaAgregar = modulosDisponibles.filter(m => !(m in datos));
+
+    if (modulosParaAgregar.length === 0) {
+        select.disabled = true;
+        const opt = document.createElement('option');
+        opt.textContent = 'Todos los módulos añadidos';
+        select.appendChild(opt);
+    } else {
+        const optVacia = document.createElement('option');
+        optVacia.value = '';
+        optVacia.textContent = 'Seleccionar módulo...';
+        select.appendChild(optVacia);
+
+        modulosParaAgregar.forEach(m => {
+            const opt = document.createElement('option');
+            opt.value = m;
+            opt.textContent = m.charAt(0).toUpperCase() + m.slice(1);
+            select.appendChild(opt);
+        });
+    }
+
+    const btnAdd = document.createElement('button');
+    btnAdd.textContent = 'Añadir';
+    btnAdd.style.cssText = 'background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: #22c55e; padding: 6px 12px; border-radius: 4px; font-size: 0.75rem; cursor: pointer; transition: all 0.2s;';
+    btnAdd.disabled = modulosParaAgregar.length === 0;
+
+    btnAdd.addEventListener('click', () => {
+        const modulo = select.value;
+        if (!modulo) return;
+
+        // Inyectar estructura inicial básica según el módulo
+        if (modulo === 'estado') {
+            datos['estado'] = { variable: 'nuevo', actual: 'estado1', reacciones: { estado1: {} } };
+        } else if (modulo === 'condicion') {
+            datos['condicion'] = [];
+        } else if (modulo === 'texto') {
+            datos['texto'] = { contenido: 'Nuevo texto' };
+        }
+
+        // Forzar re-renderizado del inspector (y cargar el editor.js correspondiente)
+        mostrarInspector(datos, path);
+    });
+
+    wrap.appendChild(select);
+    wrap.appendChild(btnAdd);
+    contenedorAdd.appendChild(wrap);
+
+    // Lo añadimos al final de propsPlus (asegurándonos de que propsPlus sea visible)
+    propsPlus.style.display = 'block';
+    propsPlus.appendChild(contenedorAdd);
 }
 
 // Crear control automático para una propiedad nativa

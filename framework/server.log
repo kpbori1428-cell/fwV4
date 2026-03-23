@@ -1,2 +1,36 @@
-V4 Server: http://localhost:3003
-V4 Editor: http://localhost:3003/editor.html
+127.0.0.1 - - [23/Mar/2026 00:37:19] "GET /editor.html HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:19] "GET /editor-app.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:19] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:20] "GET /maestro.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:20] "GET /engine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:20] "GET /funcion.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:20] "GET /maestro.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:20] "GET /funciones/condicion/condicion.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:20] "GET /funciones/estado/estado.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:20] "GET /paletas/texto/visual.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:20] "GET /paletas/texto/base.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:22] code 404, message File not found
+127.0.0.1 - - [23/Mar/2026 00:37:22] "GET /paletas/estado/editor.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Mar/2026 00:37:22] "GET /funciones/estado/editor.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:22] code 404, message File not found
+127.0.0.1 - - [23/Mar/2026 00:37:22] "GET /paletas/condicion/editor.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Mar/2026 00:37:22] "GET /funciones/condicion/editor.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:37:22] "GET /paletas/texto/editor.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:32] "GET /editor.html HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:32] "GET /editor-app.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:32] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:32] "GET /engine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:32] "GET /maestro.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:32] "GET /maestro.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:32] "GET /funcion.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:32] "GET /funciones/estado/estado.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:32] "GET /funciones/condicion/condicion.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:32] "GET /paletas/texto/visual.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:32] "GET /paletas/texto/base.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:34] code 404, message File not found
+127.0.0.1 - - [23/Mar/2026 00:40:34] "GET /paletas/estado/editor.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Mar/2026 00:40:34] "GET /funciones/estado/editor.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:34] code 404, message File not found
+127.0.0.1 - - [23/Mar/2026 00:40:34] "GET /paletas/condicion/editor.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Mar/2026 00:40:34] "GET /funciones/condicion/editor.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 00:40:34] "GET /paletas/texto/editor.js HTTP/1.1" 200 -
