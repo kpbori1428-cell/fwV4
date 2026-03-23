@@ -1,6 +1,6 @@
 {
     "head": {
-        "titulo": "V4 Framework \u2014 Test"
+        "titulo": "V4 Framework — Test"
     },
     "pagina": {
         "width": "100%",
@@ -40,7 +40,7 @@
             },
             "subtitulo": {
                 "texto": {
-                    "contenido": "JSON \u2192 JS \u2192 HTML",
+                    "contenido": "JSON → JS → HTML",
                     "font-size": "1rem",
                     "color": "#64748b"
                 }
@@ -121,34 +121,18 @@
                     "font-size": "0.9rem",
                     "font-family": "system-ui, sans-serif",
                     "transition": "all 0.3s ease",
-                    "texto": {
-                        "contenido": "Switch 1"
-                    },
+                    "texto": { "contenido": "Switch 1" },
                     "estado": {
                         "variable": "modo1",
                         "actual": "apagado",
                         "reacciones": {
-                            "apagado": {
-                                "background": "#1e293b",
-                                "color": "#e2e8f0"
-                            },
-                            "encendido": {
-                                "background": "#22c55e",
-                                "color": "#000000"
-                            }
+                            "apagado": { "background": "#1e293b", "color": "#e2e8f0" },
+                            "encendido": { "background": "#22c55e", "color": "#000000" }
                         }
                     },
                     "condicion": [
-                        {
-                            "evento": "click",
-                            "si-estado-es": "apagado",
-                            "entonces-cambiar-a": "encendido"
-                        },
-                        {
-                            "evento": "click",
-                            "si-estado-es": "encendido",
-                            "entonces-cambiar-a": "apagado"
-                        }
+                        { "evento": "click", "si-estado-es": "apagado", "entonces-cambiar-a": "encendido" },
+                        { "evento": "click", "si-estado-es": "encendido", "entonces-cambiar-a": "apagado" }
                     ]
                 },
                 "switch2": {
@@ -157,34 +141,18 @@
                     "font-size": "0.9rem",
                     "font-family": "system-ui, sans-serif",
                     "transition": "all 0.3s ease",
-                    "texto": {
-                        "contenido": "Switch 2"
-                    },
+                    "texto": { "contenido": "Switch 2" },
                     "estado": {
                         "variable": "modo2",
                         "actual": "apagado",
                         "reacciones": {
-                            "apagado": {
-                                "background": "#1e293b",
-                                "color": "#e2e8f0"
-                            },
-                            "encendido": {
-                                "background": "#22c55e",
-                                "color": "#000000"
-                            }
+                            "apagado": { "background": "#1e293b", "color": "#e2e8f0" },
+                            "encendido": { "background": "#22c55e", "color": "#000000" }
                         }
                     },
                     "condicion": [
-                        {
-                            "evento": "click",
-                            "si-estado-es": "apagado",
-                            "entonces-cambiar-a": "encendido"
-                        },
-                        {
-                            "evento": "click",
-                            "si-estado-es": "encendido",
-                            "entonces-cambiar-a": "apagado"
-                        }
+                        { "evento": "click", "si-estado-es": "apagado", "entonces-cambiar-a": "encendido" },
+                        { "evento": "click", "si-estado-es": "encendido", "entonces-cambiar-a": "apagado" }
                     ]
                 }
             },
@@ -213,18 +181,12 @@
                 },
                 "condicion": [
                     {
-                        "observar": [
-                            "pagina.demo-estado.grupo-switches.switch1",
-                            "pagina.demo-estado.grupo-switches.switch2"
-                        ],
+                        "observar": ["pagina.demo-estado.grupo-switches.switch1", "pagina.demo-estado.grupo-switches.switch2"],
                         "si-todos-son": "encendido",
                         "entonces-cambiar-a": "abierto"
                     },
                     {
-                        "observar": [
-                            "pagina.demo-estado.grupo-switches.switch1",
-                            "pagina.demo-estado.grupo-switches.switch2"
-                        ],
+                        "observar": ["pagina.demo-estado.grupo-switches.switch1", "pagina.demo-estado.grupo-switches.switch2"],
                         "si-alguno-es": "apagado",
                         "entonces-cambiar-a": "cerrado"
                     }
@@ -301,16 +263,6 @@
                         }
                     }
                 }
-            }
-        },
-        "demo-tarjeta-base": {
-            "margin-top": "24px",
-            "tarjeta": {
-                "border-radius": "30px",
-                "border": "1px solid #ff0000"
-            },
-            "texto": {
-                "contenido": "Esta tarjeta deber\u00eda tener padding y background heredados del base.json, pero con borde rojo de 30px del maestro.json."
             }
         }
     }

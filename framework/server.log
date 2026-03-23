@@ -1,14 +1,27 @@
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /editor.html HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /editor-app.js HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /index.html HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /maestro.json HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /engine.js HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /maestro.js HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /funcion.js HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /funciones/estado/estado.js HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /paletas/texto/visual.js HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /paletas/tarjeta/visual.js HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /paletas/texto/base.json HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:18] "GET /paletas/tarjeta/base.json HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:20] "GET /paletas/tarjeta/editor.js HTTP/1.1" 200 -
-127.0.0.1 - - [23/Mar/2026 05:15:20] "GET /paletas/texto/editor.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /editor.html HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /editor-app.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /index.html HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /engine.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /maestro.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /funcion.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /maestro.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /funciones/estado/estado.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /funciones/condicion/condicion.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /paletas/texto/visual.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /paletas/tarjeta/visual.js HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:47] "GET /paletas/texto/base.json HTTP/1.1" 200 -
+127.0.0.1 - - [23/Mar/2026 03:51:49] code 501, message Unsupported method ('POST')
+127.0.0.1 - - [23/Mar/2026 03:51:49] "POST /guardar HTTP/1.1" 501 -
+127.0.0.1 - - [23/Mar/2026 03:51:49] "GET /editor.html HTTP/1.1" 304 -
+127.0.0.1 - - [23/Mar/2026 03:51:52] code 404, message File not found
+127.0.0.1 - - [23/Mar/2026 03:51:52] "GET /paletas/header/editor.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Mar/2026 03:51:52] code 404, message File not found
+127.0.0.1 - - [23/Mar/2026 03:51:52] "GET /funciones/header/editor.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Mar/2026 03:51:52] code 404, message File not found
+127.0.0.1 - - [23/Mar/2026 03:51:52] "GET /paletas/contenido/editor.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Mar/2026 03:51:52] code 404, message File not found
+127.0.0.1 - - [23/Mar/2026 03:51:52] "GET /funciones/contenido/editor.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Mar/2026 03:51:52] code 404, message File not found
+127.0.0.1 - - [23/Mar/2026 03:51:52] "GET /paletas/demo-estado/editor.js HTTP/1.1" 404 -
+127.0.0.1 - - [23/Mar/2026 03:51:52] code 404, message File not found
+127.0.0.1 - - [23/Mar/2026 03:51:52] "GET /funciones/demo-estado/editor.js HTTP/1.1" 404 -
