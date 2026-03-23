@@ -35,9 +35,6 @@ export function esReservada(clave) {
 import { inicializar as initEstado } from './funciones/estado/estado.js';
 initEstado(registrar);
 
-import { inicializar as initCondicion } from './funciones/condicion/condicion.js';
-initCondicion(registrar);
-
 // Cargar paletas
 const textoVisual = await import('./paletas/texto/visual.js');
 registrarPaleta('texto', textoVisual);

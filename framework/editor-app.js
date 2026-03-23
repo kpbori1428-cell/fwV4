@@ -105,7 +105,6 @@ async function mostrarInspector(datos, path) {
     sinSeleccion.style.display = 'none';
     propsNativas.style.display = 'block';
     propsNativas.innerHTML = '<h3>Propiedades Nativas</h3>';
-    propsPlus.innerHTML = '';
 
     let tienePlus = false;
 
@@ -120,7 +119,7 @@ async function mostrarInspector(datos, path) {
                 editorMod = await import(`./paletas/${clave}/editor.js`);
             } catch (e) {}
 
-            // Intentar cargar editor de función (ej: estado, condicion)
+            // Intentar cargar editor de función
             if (!editorMod) {
                 try {
                     editorMod = await import(`./funciones/${clave}/editor.js`);
@@ -147,129 +146,9 @@ async function mostrarInspector(datos, path) {
         agregarControlNativo(clave, valor, datos, propsNativas);
     }
 
-
-    // Boton de "Guardar Estado Actual"
-    const btnGuardarEstado = document.createElement('button');
-    btnGuardarEstado.textContent = '💾 Guardar estado actual';
-    btnGuardarEstado.style.cssText = 'margin-top: 24px; background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #34d399; padding: 6px 12px; border-radius: 6px; font-size: 0.75rem; cursor: pointer; width: 100%; transition: all 0.2s;';
-    btnGuardarEstado.addEventListener('mouseenter', () => btnGuardarEstado.style.background = 'rgba(16, 185, 129, 0.2)');
-    btnGuardarEstado.addEventListener('mouseleave', () => btnGuardarEstado.style.background = 'rgba(16, 185, 129, 0.1)');
-
-    btnGuardarEstado.addEventListener('click', () => {
-        if (!datos.estado) {
-            datos.estado = {
-                variable: 'personalizado',
-                actual: 'personalizado',
-                acciones: {},
-                reacciones: {}
-            };
-        }
-
-        const nombreEstado = datos.estado.actual || 'personalizado';
-        if (!datos.estado.reacciones) datos.estado.reacciones = {};
-
-        const propiedadesActuales = {};
-
-        // Copiar props nativas
-        for (const clave in datos) {
-            if (typeof datos[clave] !== 'object') {
-                propiedadesActuales[clave] = datos[clave];
-            } else if (clave !== 'estado' && clave !== 'condicion' && clave !== 'hijos') {
-                // Copiar configuraciones de paletas (ej. gradiente-texto, texto)
-                propiedadesActuales[clave] = JSON.parse(JSON.stringify(datos[clave]));
-            }
-        }
-
-        datos.estado.reacciones[nombreEstado] = propiedadesActuales;
-
-        btnGuardarEstado.textContent = '✓ Guardado como "' + nombreEstado + '"';
-        setTimeout(() => btnGuardarEstado.textContent = '💾 Guardar estado actual', 2000);
-
-        guardarJSON(jsonMaestro);
-        mostrarInspector(datos, path);
-    });
-
-    propsNativas.appendChild(btnGuardarEstado);
-
     if (!tienePlus) {
-
         propsPlus.style.display = 'none';
     }
-
-    // Agregar sección para inyectar nuevos módulos (paletas/funciones)
-    agregarSelectorDeModulos(datos, path);
-}
-
-// Selector para añadir módulos que el elemento aún no tiene
-function agregarSelectorDeModulos(datos, path) {
-    const contenedorAdd = document.createElement('div');
-    contenedorAdd.style.cssText = 'margin-top: 24px; padding-top: 16px; border-top: 1px dashed rgba(255,255,255,0.1);';
-
-    const titulo = document.createElement('h3');
-    titulo.textContent = 'Añadir Funcionalidad';
-    titulo.style.cssText = 'font-size: 0.7rem; color: #475569; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 12px;';
-    contenedorAdd.appendChild(titulo);
-
-    const wrap = document.createElement('div');
-    wrap.style.cssText = 'display: flex; gap: 8px;';
-
-    const select = document.createElement('select');
-    select.style.cssText = 'flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: #e2e8f0; padding: 6px 8px; border-radius: 4px; font-size: 0.75rem;';
-
-    // Lista de módulos core disponibles
-    const modulosDisponibles = ['estado', 'condicion', 'texto', 'tarjeta'];
-
-    // Filtrar los que ya tiene el elemento
-    const modulosParaAgregar = modulosDisponibles.filter(m => !(m in datos));
-
-    if (modulosParaAgregar.length === 0) {
-        select.disabled = true;
-        const opt = document.createElement('option');
-        opt.textContent = 'Todos los módulos añadidos';
-        select.appendChild(opt);
-    } else {
-        const optVacia = document.createElement('option');
-        optVacia.value = '';
-        optVacia.textContent = 'Seleccionar módulo...';
-        select.appendChild(optVacia);
-
-        modulosParaAgregar.forEach(m => {
-            const opt = document.createElement('option');
-            opt.value = m;
-            opt.textContent = m.charAt(0).toUpperCase() + m.slice(1);
-            select.appendChild(opt);
-        });
-    }
-
-    const btnAdd = document.createElement('button');
-    btnAdd.textContent = 'Añadir';
-    btnAdd.style.cssText = 'background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.3); color: #22c55e; padding: 6px 12px; border-radius: 4px; font-size: 0.75rem; cursor: pointer; transition: all 0.2s;';
-    btnAdd.disabled = modulosParaAgregar.length === 0;
-
-    btnAdd.addEventListener('click', () => {
-        const modulo = select.value;
-        if (!modulo) return;
-
-        // Inyectar estructura inicial básica según el módulo
-        if (modulo === 'estado') {
-            datos['estado'] = { variable: 'nuevo', actual: 'estado1', reacciones: { estado1: {} } };
-        } else if (modulo === 'condicion') {
-            datos['condicion'] = [];
-        } else if (modulo === 'texto') {
-            datos['texto'] = { contenido: 'Nuevo texto' };
-        }
-
-        // Forzar re-renderizado del inspector (y cargar el editor.js correspondiente)
-        mostrarInspector(datos, path);
-    });
-
-    wrap.appendChild(select);
-    wrap.appendChild(btnAdd);
-    contenedorAdd.appendChild(wrap);
-
-    // Lo añadimos al final de propsPlus (asegurándonos de que propsPlus sea visible)
-    propsPlus.style.display = 'block';
-    propsPlus.appendChild(contenedorAdd);
 }
 
 // Crear control automático para una propiedad nativa
@@ -308,29 +187,7 @@ function agregarControlNativo(clave, valor, jsonRef, contenedor) {
 // Mostrar controles plus de una paleta
 async function mostrarPlusControles(nombrePaleta, editorMod, datos, path) {
     propsPlus.style.display = 'block';
-
-    const contenedorPlus = document.createElement('div');
-    contenedorPlus.style.cssText = 'margin-bottom: 12px; border: 1px solid rgba(139,92,246,0.3); border-radius: 6px; overflow: hidden;';
-
-    // Header del acordeón
-    const header = document.createElement('div');
-    header.style.cssText = 'background: rgba(139,92,246,0.15); padding: 8px 12px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: #d8b4fe; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;';
-
-    const titulo = document.createElement('span');
-    titulo.textContent = `Plus — ${nombrePaleta}`;
-    header.appendChild(titulo);
-
-    const iconoCaret = document.createElement('span');
-    // Si la paleta es la de texto o estado por default las cerramos, y abrimos la de condicion si existe. O por simplicidad, todas abiertas.
-    iconoCaret.textContent = '▼';
-    iconoCaret.style.cssText = 'transition: transform 0.2s; font-size: 0.7rem;';
-    header.appendChild(iconoCaret);
-
-    contenedorPlus.appendChild(header);
-
-    // Contenido del acordeón
-    const contenido = document.createElement('div');
-    contenido.style.cssText = 'padding: 12px; background: rgba(0,0,0,0.2);';
+    propsPlus.innerHTML = `<h3>Plus — ${nombrePaleta}</h3>`;
 
     const datosPlus = datos[nombrePaleta] || {};
 
@@ -344,25 +201,10 @@ async function mostrarPlusControles(nombrePaleta, editorMod, datos, path) {
     // El editor.js de la paleta construye los controles reales
     const controles = editorMod.construirControles(datosPlus, elementoPreview, (propiedad, valor) => {
         // Callback: actualizar JSON cuando el usuario modifica un control
-        if (Array.isArray(datos[nombrePaleta]) && propiedad === nombrePaleta) {
-            datos[nombrePaleta] = valor;
-        } else {
-            datos[nombrePaleta][propiedad] = valor;
-        }
+        datos[nombrePaleta][propiedad] = valor;
     });
 
-    contenido.appendChild(controles);
-    contenedorPlus.appendChild(contenido);
-
-    // Lógica colapsable
-    let abierto = true;
-    header.addEventListener('click', () => {
-        abierto = !abierto;
-        contenido.style.display = abierto ? 'block' : 'none';
-        iconoCaret.style.transform = abierto ? 'rotate(0deg)' : 'rotate(-90deg)';
-    });
-
-    propsPlus.appendChild(contenedorPlus);
+    propsPlus.appendChild(controles);
 }
 
 // Actualizar preview recargando el iframe
