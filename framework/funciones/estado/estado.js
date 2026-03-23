@@ -5,6 +5,8 @@
  * y las reacciones (propiedades CSS) de cada estado.
  */
 
+import { ejecutar } from '../../funcion.js';
+
 const estados = {};
 
 export function inicializar(registrar) {
@@ -55,7 +57,10 @@ function aplicarEstado(id, nuevoEstado) {
 
     // Aplicar propiedades del nuevo estado
     for (const prop in propiedades) {
-        if (prop === 'texto') {
+        if (typeof propiedades[prop] === 'object' && propiedades[prop] !== null) {
+            // Es una paleta o función avanzada (ej. gradiente-texto, texto)
+            ejecutar(prop, propiedades[prop], estado.elemento, id + '.' + prop);
+        } else if (prop === 'texto') {
             estado.elemento.dataset.estadoTextoEsperado = propiedades[prop];
             // Actualizar el DOM si la paleta de texto ya existe o si solo hay texto plano
             const textNode = Array.from(estado.elemento.querySelectorAll('div')).find(div => div.dataset.path && div.dataset.path.endsWith('.texto'));
