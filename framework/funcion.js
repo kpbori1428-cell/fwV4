@@ -41,3 +41,6 @@ initCondicion(registrar);
 // Cargar paletas
 const textoVisual = await import('./paletas/texto/visual.js');
 registrarPaleta('texto', textoVisual);
+
+const tarjetaVisual = await import('./paletas/tarjeta/visual.js');
+registrarPaleta('tarjeta', tarjetaVisual);

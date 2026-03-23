@@ -217,7 +217,7 @@ function agregarSelectorDeModulos(datos, path) {
     select.style.cssText = 'flex: 1; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); color: #e2e8f0; padding: 6px 8px; border-radius: 4px; font-size: 0.75rem;';
 
     // Lista de módulos core disponibles
-    const modulosDisponibles = ['estado', 'condicion', 'texto'];
+    const modulosDisponibles = ['estado', 'condicion', 'texto', 'tarjeta'];
 
     // Filtrar los que ya tiene el elemento
     const modulosParaAgregar = modulosDisponibles.filter(m => !(m in datos));
